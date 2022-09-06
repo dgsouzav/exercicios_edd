@@ -65,9 +65,45 @@ int main(){
             }
             break;
         case 4:
-                system("cls");
-                    for(i = 1; i <= );
+            printf("===================== EDITAR CADASTRO ===================\n");
+            for ( i = 0; i < contUser; i++)
+            {
+                    printf("===================== USUARIO %d ======================\n", i + 1);
+                    printf("| NOME: %s\n", nome[i]);
+                    printf("| TELEFONE: (%d) %d-%.4d\n", ddd[i], tel[i]/10000, tel[i]%10000);
+                    printf("======================================================\n\n");
+            }
+            int posicao;
+            printf("Informe qual usuário deseja alterar: ");
+            scanf(" %[^\n]", posicao);
+
+            printf("NOME: ");
+            scanf(" %[^\n]", nome[posicao - 1]);
+
+            printf("DDD: ");
+            scanf("%d", &ddd[posicao - 1]);
+
+            printf("TELEFONE: ");
+            scanf("%d", &tel[posicao - 1]);
+
+            break;
         case 5:
+            printf("===================== EXCLUIR CADASTRO ===================\n");
+            for ( i = 0; i < contUser; i++)
+            {
+                    printf("===================== USUARIO %d ======================\n", i + 1);
+                    printf("| NOME: %s\n", nome[i]);
+                    printf("| TELEFONE: (%d) %d-%.4d\n", ddd[i], tel[i]/10000, tel[i]%10000);
+                    printf("======================================================\n\n");
+            }
+            int posicao;
+            printf("Informe qual usuário deseja excluir: ");
+            scanf(" %[^\n]", posicao);
+
+            nome[posicao - 1 ] = NULL;
+            ddd[posicao - 1 ] = NULL;
+            tel[posicao - 1 ] = NULL;
+            break;
         case 6:
             printf("======================== SOBRE =======================\n");
             printf("| Este software foi desenvolvido para fins didaticos.|\n");
