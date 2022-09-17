@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define maxEnd 3   //Maximo de enderecos por usuario.
+#define maxEnd 3   //Maximo de enderecos por usuario
+#define maxTam 100  //Tamanho maximo do vetor de cadastros
 
 typedef struct sEndereco{
     char logradouro[100];
@@ -40,8 +41,50 @@ void function(){
 
 }
 
-int insert(char nome[][100], int ddd[], int tel[], int contUser){
+int insert(USER usuario[], int contUser){
+    int controle; 
     printf("===================== NOVO CADASTRO ====================\n");
+    printf("Entre com as informacoes do novo usuario: \n");
+    printf("NOME: ");
+    scanf(" %[^\n]", usuarios[contUser].nome);
+
+    printf("DDD: ");
+    scanf("%d", &usuarios[contUser].ddd);
+
+    printf("TELEFONE: ");
+    scanf("%d", &usuarios[contUser].tel);
+
+    for(int i = 0; i < maxEnd; i++){
+        printf("=========== Endereco ===========\n");
+        printf("LOGRADOURO: ");
+        scanf(" %[^\n]", usuarios[contUser].endereco[i].logradouro);
+
+        printf("NUMERO: ");
+        scanf("%d", &usuarios[contUser].endereco[i].numero);
+
+        printf("COMPLEMENTO: ");
+        scanf(" %[^\n]", usuarios[contUser].endereco[i].complemento);
+
+        printf("BAIRRO: ");
+        scanf(" %[^\n]", usuarios[contUser].endereco[i].bairro);
+
+        printf("CEP: ");
+        scanf("%d", &usuarios[contUser].endereco[i].cep);
+
+        printf("CIDADE: ");
+        scanf(" %[^\n]", usuarios[contUser].endereco[i].cidade);
+        
+        usuarios[contUser].contEnd = i + 1;
+
+        if( i < maxEnd - 1){
+            printf("Digite 1 para cadastrar + 1 endereco ou zero pra encerrar: \n");
+            scanf("%d", &controle);
+            
+            if(controle != 1)
+                break;
+        }
+    }
+    /* printf("===================== NOVO CADASTRO ====================\n");
     printf("Entre com as informacoes do novo usuario: \n");
     printf("NOME: ");
     scanf(" %[^\n]", nome[contUser]);
@@ -50,21 +93,13 @@ int insert(char nome[][100], int ddd[], int tel[], int contUser){
     scanf("%d", &ddd[contUser]);
 
     printf("TELEFONE: ");
-    scanf("%d", &tel[contUser]);
+    scanf("%d", &tel[contUser]); */
     return 1;
 }
 
 int main(){
-    USER usuarios[100];
+    USER usuarios[maxTam];
 
-    //strcpy(usuarios[0].nome, "Marques");
-    //usuarios[0].ddd = 34;
-    //usuarios[0].tel = 123456899;
-
-
-    char nome[100][100];
-    int ddd[100];
-    int tel[100];
     int escolha, contUser = 0, opEdit, controle;
     char nomeAux[100];
 
