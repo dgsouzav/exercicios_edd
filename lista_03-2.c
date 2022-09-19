@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define maxEnd 3   //Maximo de enderecos por usuario
-#define maxTam 100  //Tamanho maximo do vetor de cadastros
+#define maxEnd 3   //Maximo de enderecos por usuario.
+#define maxTam 100
 
 typedef struct sEndereco{
     char logradouro[100];
@@ -37,12 +37,9 @@ int menu(){
     return escolha;
 }
 
-void function(){
-
-}
-
-int insert(USER usuario[], int contUser){
-    int controle; 
+//SHIFT + ALT + A para comentar no Visual Code
+int insert(USER usuarios[], int contUser){
+    int controle;
     printf("===================== NOVO CADASTRO ====================\n");
     printf("Entre com as informacoes do novo usuario: \n");
     printf("NOME: ");
@@ -84,26 +81,15 @@ int insert(USER usuario[], int contUser){
                 break;
         }
     }
-    /* printf("===================== NOVO CADASTRO ====================\n");
-    printf("Entre com as informacoes do novo usuario: \n");
-    printf("NOME: ");
-    scanf(" %[^\n]", nome[contUser]);
-
-    printf("DDD: ");
-    scanf("%d", &ddd[contUser]);
-
-    printf("TELEFONE: ");
-    scanf("%d", &tel[contUser]); */
     return 1;
 }
 
 int main(){
-    USER usuarios[maxTam];
-
+    USER usuarios[100];
+ 
     int escolha, contUser = 0, opEdit, controle;
     char nomeAux[100];
 
-    
     do{
         escolha = menu();
         switch (escolha)
@@ -112,54 +98,12 @@ int main(){
             printf("Obrigado por utilizar o SisteMarques!\n");
             break;
         case 1:
-            printf("===================== NOVO CADASTRO ====================\n");
-            printf("Entre com as informacoes do novo usuario: \n");
-            printf("NOME: ");
-            scanf(" %[^\n]", usuarios[contUser].nome);
-
-            printf("DDD: ");
-            scanf("%d", &usuarios[contUser].ddd);
-
-            printf("TELEFONE: ");
-            scanf("%d", &usuarios[contUser].tel);
-
-            for(int i = 0; i < maxEnd; i++){
-                printf("=========== Endereco ===========\n");
-                printf("LOGRADOURO: ");
-                scanf(" %[^\n]", usuarios[contUser].endereco[i].logradouro);
-
-                printf("NUMERO: ");
-                scanf("%d", &usuarios[contUser].endereco[i].numero);
-
-                printf("COMPLEMENTO: ");
-                scanf(" %[^\n]", usuarios[contUser].endereco[i].complemento);
-
-                printf("BAIRRO: ");
-                scanf(" %[^\n]", usuarios[contUser].endereco[i].bairro);
-
-                printf("CEP: ");
-                scanf("%d", &usuarios[contUser].endereco[i].cep);
-
-                printf("CIDADE: ");
-                scanf(" %[^\n]", usuarios[contUser].endereco[i].cidade);
-                
-                usuarios[contUser].contEnd = i + 1;
-
-                if( i < maxEnd - 1){
-                    printf("Digite 1 para cadastrar + 1 endereco ou zero pra encerrar: \n");
-                    scanf("%d", &controle);
-                    
-                    if(controle != 1)
-                        break;
-                }
-            }
-            contUser++;
-            /*if(insert(nome, ddd, tel, contUser) == 1){
+            if(insert(usuarios, contUser) == 1){
                 printf("CADASTRO REALIZADO COM SUCESSO!\n");
                 contUser++;
             }else{
                 printf("PROBLEMA: CADASTRO NAO CONCLUIDO!\n");
-            }*/
+            }
             break;
         case 2:
             if(contUser == 0)
@@ -180,7 +124,6 @@ int main(){
                         printf("| CEP: %d\n",         usuarios[i].endereco[j].cep);
                         printf("| CIDADE: %s\n",      usuarios[i].endereco[j].cidade);
                     }
-
                     printf("======================================================\n\n");
                 }
             }
@@ -194,10 +137,10 @@ int main(){
                 scanf(" %[^\n]", nomeAux);
                 for (int i = 0; i < contUser; i++)
                 {
-                    if(strcmp(nome[i], nomeAux) == 0){
+                    if(strcmp(usuarios[i].nome, nomeAux) == 0){
                         printf("===================== USUARIO %d ======================\n", i + 1);
-                        printf("| NOME: %s\n", nome[i]);
-                        printf("| TELEFONE: (%d) %d-%.4d\n", ddd[i], tel[i]/10000, tel[i]%10000);
+                        printf("| NOME: %s\n", usuarios[i].nome);
+                        printf("| TELEFONE: (%d) %d-%.4d\n", usuarios[i].ddd, usuarios[i].tel/10000, usuarios[i].tel%10000);
                         printf("======================================================\n\n");
                         break;
                     }
@@ -213,7 +156,7 @@ int main(){
                 scanf(" %[^\n]", nomeAux);
                 for (int i = 0; i < contUser; i++)
                 {
-                    if(strcmp(nome[i], nomeAux) == 0){
+                    if(strcmp(usuarios[i].nome, nomeAux) == 0){
                         do{
                             printf("| 0 ........................................... SAIR |\n");
                             printf("| 1 .................................... EDITAR NOME |\n");
@@ -226,19 +169,19 @@ int main(){
                                 case 0:
                                     break;
                                 case 1:
-                                    printf("NOME ATUAL: %s\n", nome[i]);
+                                    printf("NOME ATUAL: %s\n", usuarios[i].nome);
                                     printf("Digite o novo nome: \n");
-                                    scanf(" %[^\n]", nome[i]);
+                                    scanf(" %[^\n]", usuarios[i].nome);
                                     break;
                                 case 2:
-                                    printf("DDD ATUAL: %s\n", ddd[i]);
+                                    printf("DDD ATUAL: %s\n", usuarios[i].ddd);
                                     printf("Digite o novo DDD: \n");
-                                    scanf("%d", &ddd[i]);
+                                    scanf("%d", &usuarios[i].ddd);
                                     break;
                                 case 3:
-                                    printf("TELEFONE ATUAL: %s\n", tel[i]);
+                                    printf("TELEFONE ATUAL: %s\n", usuarios[i].tel);
                                     printf("Digite o novo telefone: \n");
-                                    scanf("%d", &tel[i]);
+                                    scanf("%d", &usuarios[i].tel);
                                     break;
                                 default:
                                     printf("Opcao invalida!\n");
