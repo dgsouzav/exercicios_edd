@@ -127,14 +127,36 @@ void ex05(){
     }
 
     for(int i = 0; i < 100; i++) {
-        printf("Marca: %s 
-        Modelo: %s 
-        Ano: %d 
-        Cor: %s 
-        Preco: %.2f",
-        pt[i].marca, 
-        pt[i].modelo, 
-        pt[i].ano, 
-        pt[i].cor, 
-        pt[i].preco);
+        printf("Marca: %s Modelo: %s Ano: %d Cor: %s Preco: %.2f",
+        pt[i].marca, pt[i].modelo, pt[i].ano, pt[i].cor, pt[i].preco);
+}
+
+
+int main() {
+    int opcao;
+
+    printf("Digite a opcao desejada: ");
+    scanf("%d", &opcao);
+
+    switch(opcao) {
+        case 1:
+            ex01();
+            break;
+        case 2:
+            ex02();
+            break;
+        case 3:
+            ex03();
+            break;
+        case 4:
+            ex04();
+            break;
+        case 5:
+            ex05();
+            break;
+        default:
+            printf("Opcao invalida");
+    }
+
+    return 0;
 }
