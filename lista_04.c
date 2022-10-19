@@ -1,11 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
 // Faça um programa que leia dois números inteiros,
 // armazenando-os em memória alocada dinamicamente e 
 // depois escreva-os na tela.
-void ex01() {
+void EX01() {
     int *num1, *num2;
     num1 = (int *) malloc(sizeof(int));
     num2 = (int *) malloc(sizeof(int));
@@ -21,25 +20,32 @@ void ex01() {
 
 // Faça um programa que leia n inteiros(definidos pelo usuário)
 // armazenando-os em um vetor alocada dinamicamente.
-void ex02() {
-    int n, * pt;
-
-    printf("Digite um numero: ");
+void EX02() {
+    int *vetor, n, i;
+    printf("Digite o tamanho do vetor: ");
     scanf("%d", &n);
+    vetor = (int *) malloc(n * sizeof(int));
 
-    pt = (int *) malloc(n * sizeof(int));
+    for (i = 0; i < n; i++) {
+        printf("Digite um numero: ");
+        scanf("%d", &vetor[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("O numero digitado foi: %d", vetor[i]);
+    }
 }
 
 // Defina uma estrutura para armazenar um cadastro de 
 // cliente: nome, idade e telefone. Peça ao usuário o número de 
 // clientes e aloque dinamicamente na memória a quantidade de 
 // estruturas necessárias. Em seguida, leia os dados destes clientes.
-void ex03() {
+void EX03() {
     typedef struct cadastro {
         char nome[50];
         int idade;
         char telefone[15];
-    };
+    } Cadastro;
 
     int n;
     struct cadastro * pt;
@@ -61,7 +67,7 @@ void ex03() {
 
 // Aloque dinamicamente uma matriz de tamanho a ser informado pelo usuário.
 // Preencha, imprima e depois libere a memória alocada.
-void ex04(){
+void EX04() {
     int n, m;
     int **matriz;
 
@@ -94,20 +100,22 @@ void ex04(){
         free(matriz[i]);
     }
     free(matriz);
+    matriz = NULL;
+
 }
 
 // Crie um programa com uma struct para armazenar as informações de carros em uma garagem 
 // de venda de veículos. Crie uma função externa ao main para realizar o cadastro 
 // de um automóvel e outra para edição dos dados de um automóvel. A variável do tipo 
 // struct de tamanho 100 deve obrigatoriamente ser declarada na main e passada como referência para a função.
-void ex05(){ 
+void EX05() { 
     typedef struct carro {
         char marca[50];
         char modelo[50];
         int ano;
         char cor[20];
         float preco;
-    };
+    } Carro;
 
     struct carro * pt;
 
@@ -129,7 +137,7 @@ void ex05(){
     for(int i = 0; i < 100; i++) {
         printf("Marca: %s Modelo: %s Ano: %d Cor: %s Preco: %.2f",
         pt[i].marca, pt[i].modelo, pt[i].ano, pt[i].cor, pt[i].preco);
-}
+}}
 
 
 int main() {
@@ -140,23 +148,22 @@ int main() {
 
     switch(opcao) {
         case 1:
-            ex01();
+            EX01();
             break;
         case 2:
-            ex02();
+            EX02();
             break;
         case 3:
-            ex03();
+            EX03();
             break;
         case 4:
-            ex04();
+            EX04();
             break;
         case 5:
-            ex05();
+            EX05();
             break;
         default:
             printf("Opcao invalida");
     }
-
     return 0;
 }
