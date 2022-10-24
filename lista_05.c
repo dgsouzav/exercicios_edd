@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #define MAX_TAM 10
 
-// crie uma função para imprimir todos os elementos da lista
 typedef struct sLista {
     char elem[MAX_TAM];
     int ultimo;
@@ -102,7 +101,10 @@ int ordenarLista(Lista *lista) {
 int main() {
     int opcao;
     char elem;
-    int posicao;
+    int posicao = 0;
+    Lista lista;
+
+    inicializarLista(&lista);
     do {
         printf("1 - Inserir elemento no final da lista");
         printf("2 - Inserir elemento em uma posição específica da lista");
@@ -115,20 +117,20 @@ int main() {
             case 1:
                 printf("Digite o elemento que deseja inserir: ");
                 scanf("%c", &elem);
-                inserirFim(Lista *lista, elem);
+                inserirFim(&lista, elem);
                 break;
             case 2:
                 printf("Digite o elemento que deseja inserir: ");
                 scanf("%c", &elem);
                 printf("Digite a posição que deseja inserir o elemento: ");
                 scanf("%d", &posicao);
-                inserirElemento(*lista, elem, posicao);
+                inserirElemento(&lista, elem, posicao);
                 break;
             case 3:
-                inverterLista(*lista);
+                inverterLista(&lista);
                 break;
             case 4:
-                ordenarLista(*lista);
+                ordenarLista(&lista);
                 break;
             case 5:
                 printf("Saindo...");
