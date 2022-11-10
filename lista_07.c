@@ -4,8 +4,10 @@
 
 typedef struct sPessoa {
     char nome[50];
+    char matricula[10];
     int idade;
     float altura;
+
 } PESSOA;
 
 void incializarLista (PESSOA **lista) {
@@ -76,7 +78,24 @@ int inserirFim(PESSOA **lista, int elemento){
     return 1;
 }
 
-PESSOA removerInicio(PESSOA)
+PESSOA removerInicio(PESSOA **lista){
+    PESSOA *auxiliar;
+
+    PESSOA removido;
+    strcpy(removido.nome, " ");
+    removido.matricula = 1;
+
+    if(listaVazia(lista)){
+        printf("\nErro: Lista vazia!");
+        return removido;
+    }
+
+    removida = (*lista)
+    removida = (*lista)->info;
+
+    free(removida);
+    return removido;
+}
 
 
 
