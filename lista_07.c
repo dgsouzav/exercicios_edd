@@ -2,25 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct sCell{
+    int info;
+    struct sCell *next;
+} CELULA;
 
 typedef struct sPessoa {
     char nome[50];
     char matricula[10];
 } PESSOA;
 
-void incializarLista (PESSOA **lista) {
+void incializarLista (CELULA **lista) {
     (*lista) = NULL;
 }
 
-int verificarListaVazia(PESSOA **lista){
+int verificarListaVazia(CELULA **lista){
     if ((*lista) == NULL) {
         return 1;
     }
     return 0;
 }
 
-void imprimirLista(PESSOA **lista){
-    PESSOA *auxiliar = (*lista);
+void imprimirLista(CELULA **lista){
+    CELULA *auxiliar = (*lista);
         if(listaVazia(lista)){
             printf("Lista vazia!");
         } else {
@@ -33,9 +37,9 @@ void imprimirLista(PESSOA **lista){
     }
 }
 
-int inserirInicio(PESSOA **lista, int elemento){
-    PESSOA *nocaCelula = criarPessoa();
-    if(novaPessoa == NULL){
+int inserirInicio(CELULA **lista, int elemento){
+    CELULA *novaCelula = criarCelula();
+    if(novaCelula == NULL){
         printf("\nErro: Memoria cheia!");
         return 0;
     }
@@ -44,25 +48,25 @@ int inserirInicio(PESSOA **lista, int elemento){
     }
     novaPessoa->info = elemento;
     novaPessoa->next = (*lista);
-    (*lista) = novaPessoa;
+    (*lista) = novaCelula;
     return 1;
 }
 
 int inserirFim(PESSOA **lista, int elemento){
-    PESSOA *novaPessoa;
-    PESSOA *auxiliar;
+    CELULA *novaCelula;
+    CELULA *auxiliar;
 
-    novaPessoa = criarPessoa();
-    if(novaPessoa == NULL){
+    novaCelula = criarCelula();
+    if(novaCelula == NULL){
         printf("\nErro: Memoria cheia!");
         return 0;
     }
 
-    novaPessoa->info = elemento;
-    novaPessoa->next = NULL;
+    novaCelula->info = elemento;
+    novaCelula->next = NULL;
 
     if(listaVazia(lista)){
-        (*lista) = novaPessoa;
+        (*lista) = novaCelula;
         return 1;
     }
 
@@ -72,12 +76,12 @@ int inserirFim(PESSOA **lista, int elemento){
         auxiliar = auxiliar->next;
     }
 
-    auxiliar->next = novaPessoa;
+    auxiliar->next = novaCelula;
     return 1;
 }
 
 PESSOA removerInicio(PESSOA **lista){
-    PESSOA *auxiliar;
+    CELULA *auxiliar;
 
     PESSOA removido;
     strcpy(removido.nome, " ");
@@ -89,17 +93,16 @@ PESSOA removerInicio(PESSOA **lista){
     }
 
     removida = (*lista)
-    removida = (*lista)->info;
+    removido = (*lista)->info;
 
     free(removida);
     return removido;
 }
 
-PESSOA removerFim(PESSOA **lista){
-    PESSOA *removida;
-    PESSOA *anterior;
+PESSOA removerFim(CELULA **lista){
+    CELULA *removida;
+    CELULA *anterior;
 
-    PESSOA *anterior;
     PESSOA removido = criarPessoa("", -1);
 
     if(listaVazia(lista)){
@@ -124,8 +127,8 @@ PESSOA removerFim(PESSOA **lista){
     return removido;
 }
 
-PESSOA *pesquisarMatricula(PESSOA **lista, int mat){
-    PESSOA *auxiliar;
+CELULA *pesquisarMatricula(CELULA **lista, int mat){
+    CELULA *auxiliar;
 
     if(listaVazia(lista)){
         printf("\nErro: Lista vazia!");
@@ -143,8 +146,8 @@ PESSOA *pesquisarMatricula(PESSOA **lista, int mat){
 }
 
 PESSOA removerMatricula(PESSOA **Lista){
-    PESSOA *removida;
-    PESSOA *anterior;
+    CELULA *removida;
+    CELULA *anterior;
     PESSOA pRemover = criarPessoa("", -1);
 
     if(listaVazia(lista)){
@@ -176,14 +179,14 @@ PESSOA removerMatricula(PESSOA **Lista){
 
 int main(){
     PESSOA temp;
-    PESSOA *ptrlista, *tempPes;
+    CELULA *ptrlista, *tempCel;
     inicializarLista(&ptrlista);
 
     strcpy(temp.nome, "Jose");
     temp.matricula = 1;
 
-    tempPes = pesquisarMatricula(&ptrlista, 2);
-    if(tempPes == NULL){
+    tempCel = pesquisarMatricula(&ptrlista, 2);
+    if(tempCel == NULL){
         printf("\nMatricula nao encontrada!");
     } else {
         printf("\nMatricula encontrada!");
@@ -192,8 +195,8 @@ int main(){
     inserirFim(&ptrlista, temp);
     imprimirLista(&ptrlista);
 
-    tempPes = pesquisarMatricula(&ptrlista, 2);
-    if(tempPes == NULL){
+    tempCel = pesquisarMatricula(&ptrlista, 2);
+    if(tempCel == NULL){
         printf("\nMatricula nao encontrada!");
     } else {
         printf("\nMatricula encontrada!");
@@ -208,8 +211,8 @@ int main(){
     strcpy(temp.nome, "Joao");
     temp.matricula = 4;
 
-    tempPes = pesquisarMatricula(&ptrlista, 2);
-    if(tempPes != NULL){
+    tempCel = pesquisarMatricula(&ptrlista, 2);
+    if(tempCel != NULL){
         printf("\nMatricula nao encontrada!");
     } else {
         printf("\nMatricula encontrada!");
@@ -239,7 +242,3 @@ int menu(){
     printf("7 - Pesquisar pessoa por matricula\n");
     printf("8 - Remover pessoa por matricula\n");
 }
-
-
-
-
